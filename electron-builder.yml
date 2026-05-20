@@ -1,0 +1,50 @@
+appId: app.psy0n3.animeviewer
+productName: AnimeViewer
+directories:
+  output: release
+  buildResources: build
+files:
+  - electron/**
+  - front/dist/**
+extraResources:
+  - from: back
+    to: back
+    filter:
+      - "**/*"
+      - "!downloads/**"
+      - "!storage/**"
+      - "!tests/**"
+      - "!Apis/**"
+      - "!*.md"
+      - "!*.txt"
+  - from: back/node_modules
+    to: back/node_modules
+    filter:
+      - "**/*"
+mac:
+  icon: build/icon.icns
+  category: public.app-category.entertainment
+  target:
+    - dmg
+    - zip
+  artifactName: ${productName}-${version}-mac-${arch}.${ext}
+  identity: null
+win:
+  icon: build/icon.ico
+  target:
+    - nsis
+    - zip
+  artifactName: ${productName}-${version}-win-${arch}.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+linux:
+  icon: build/icon.png
+  category: AudioVideo
+  maintainer: psy0n3 <psy0n3@users.noreply.github.com>
+  target:
+    - AppImage
+    - deb
+    - tar.gz
+  artifactName: ${productName}-${version}-linux-${arch}.${ext}

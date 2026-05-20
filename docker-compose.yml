@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./back
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DISABLE_AUTH: "true"
+      DISABLE_RATE_LIMIT: "true"
+      ARTWORK_DIR: /app/storage/artwork
+      ARTWORK_INDEX_PATH: /app/storage/image-cache.json
+      CATALOG_CACHE_PATH: /app/storage/catalog-cache.json
+      DOWNLOADS_DIR: /app/downloads
+    volumes:
+      - anime_artwork:/app/storage
+      - anime_downloads:/app/downloads
+    expose:
+      - "3000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./front
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  anime_artwork:
+  anime_downloads:
