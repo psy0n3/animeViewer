@@ -1,5 +1,9 @@
 appId: app.psy0n3.animeviewer
 productName: AnimeViewer
+publish:
+  provider: github
+  owner: psy0n3
+  repo: animeViewer
 directories:
   output: release
   buildResources: build
